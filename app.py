@@ -1,12 +1,14 @@
 from flask import Flask, jsonify, request
+from flask_migrate import Migrate
 from models import db
-from models.restaurant import Restaurant
-from models.pizza import Pizza
-from models.restaurantpizza import RestaurantPizza
+from models.models import Restaurant, Pizza, RestaurantPizza
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///pizza_restaurant.db'
 db.init_app(app)
+
+migrate = Migrate(app, db)
 
 # Create a new restaurant
 @app.route('/restaurants', methods=['POST'])
@@ -14,7 +16,7 @@ def create_restaurant():
     data = request.json
     name = data['name']
     location = data['location']
-    rating = data.get('rating')  # Rating is optional
+    rating = data.get('rating') 
     new_restaurant = Restaurant(name=name, location=location, rating=rating)
     db.session.add(new_restaurant)
     db.session.commit()
