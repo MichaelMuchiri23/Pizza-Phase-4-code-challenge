@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 from flask_migrate import Migrate
 from models import db
 from models.models import Restaurant, Pizza, RestaurantPizza
+from models.seed import add_seed_data
 
 
 app = Flask(__name__)
@@ -78,4 +79,7 @@ def create_restaurant_pizza():
 
 
 if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
+        add_seed_data()
     app.run(debug=True)
