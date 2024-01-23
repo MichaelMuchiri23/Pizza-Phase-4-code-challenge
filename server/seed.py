@@ -7,7 +7,6 @@ with app.app_context():
     db.drop_all()
     db.create_all()
 
-def add_seed_data():
     # Add seed data for restaurants
     restaurant1 = Restaurant(name='Pizzeria Uno', address='New York', rating=4.5)
     restaurant2 = Restaurant(name='Pizza Hut', address='Chicago', rating=4.0)
@@ -31,3 +30,4 @@ def add_seed_data():
     db.session.add(restaurant_pizzas2)
 
     db.session.commit()
+
