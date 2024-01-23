@@ -80,6 +80,5 @@ def create_restaurant_pizza():
 
 if __name__ == '__main__':
     with app.app_context():
-        db.create_all()
         add_seed_data()
     app.run(debug=True)
